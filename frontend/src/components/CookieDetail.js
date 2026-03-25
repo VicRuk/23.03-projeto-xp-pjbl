@@ -65,7 +65,10 @@ const CookieDetail = () => {
               <p className="m-0 text-muted">Preço:</p>
               <h2 className="m-0 h3 fw-bold text-success">R${cookie.preco.toFixed(2)}</h2>
             </div>
-            
+            <div className="d-flex align-items-center gap-3 mb-4">
+              <p className="m-0 text-muted">Disponível:</p>
+              <h2 className="m-0 h5 fw-bold">{cookie.quantidade_estoque} unidades</h2>
+            </div>
             <div className="d-flex gap-2">
               <Link to={`/edit/${cookie.id}`} className="btn btn-primary w-50 py-2">Editar</Link>
               <Link to="/" className="btn btn-outline-dark w-50 py-2">Voltar</Link>

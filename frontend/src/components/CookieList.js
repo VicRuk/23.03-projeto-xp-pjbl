@@ -8,7 +8,7 @@ const CookieList = () => {
     const [erro, setErro] = useState("");
     
     const [paginaAtual, setPaginaAtual] = useState(1);
-    const itensPorPagina = 6;
+    const itensPorPagina = 9;
 
     useEffect(() => {
         fetchCookies();
@@ -85,16 +85,20 @@ const CookieList = () => {
                 {cookiesFiltrados.length === 0 && !erro && <p className="text-center mt-4">Nenhum cookie encontrado.</p>}
 
                 {cookiesAtuais.map((cookie) => (
-                    <div className="col-12 col-md-6 col-lg-4 d-flex align-items-stretch mb-4" key={cookie.id}>
-                        <div className="cookie-card w-100 shadow-sm">
-                            <div className="row align-items-center h-100 m-1 p-2">
+                    <div className="col-12 col-md-6 col-lg-4 d-flex align-items-stretch mb-1" key={cookie.id}>
+                        <div className="cookie-card h-100 w-100 shadow-sm" style={{ minHeight: '150px', maxHeight: '150px' }}>
+                            <div className="row align-items-center h-100 mx-1 p-2">
                                 <div className="card-image col-4 d-flex justify-content-center">
                                     <img src={`/imgs/${cookie.imagem}.png`} className="img-fluid" alt={cookie.nome} />
                                 </div>
                                 <div className="col-5 d-flex bg-white flex-column p-0">
-                                    <h2 className="h5 mt-2 mb-1">{cookie.nome}</h2>
-                                    <p className="text-muted mb-2 text-truncate" style={{ maxHeight: '40px' }}>{cookie.descricao}</p>
-                                    <h2 className="h6 fw-bold">R${cookie.preco.toFixed(2)}</h2>
+                                    <h2 className="h5 mb-1">{cookie.nome}</h2>
+                                    <p className="text-muted mb-2 text-truncate" style={{ maxHeight: '60px' }}>{cookie.descricao}</p>
+                                    <h2 className="h6 fw-bold mb-1">R${cookie.preco.toFixed(2)}</h2>
+                                    <small className="text-muted fw-semibold">
+                                        <i className="bi bi-box-seam me-1"></i>
+                                        Estoque: {cookie.quantidade_estoque}
+                                    </small>
                                 </div>
 
                                 <div className="col-3 d-flex flex-column justify-content-center align-items-center gap-0">

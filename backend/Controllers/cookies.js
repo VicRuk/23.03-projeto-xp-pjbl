@@ -18,20 +18,22 @@ export const getCookieById = (req, res) => {
 };
 
 export const addCookie = (req, res) => {
-  const { nome, descricao, preco, imagem } = req.body;
+  const { nome, descricao, preco, quantidade_estoque, imagem } = req.body;
   
-  // Todos os campos são obrigatórios
-  if (!nome || !descricao || preco === undefined || !imagem) {
+  if (!nome || !descricao || preco === undefined || quantidade_estoque === undefined || !imagem) {
     return res.status(400).json({ error: "Todos os campos são obrigatórios." });
   }
   
-  // Preço é um número válido e positivo
   if (isNaN(preco) || preco < 0) {
     return res.status(400).json({ error: "O preço deve ser um valor numérico válido e positivo." });
   }
 
-  const q = "INSERT INTO cookie(`nome`, `descricao`, `preco`, `imagem`) VALUES(?)";
-  const values = [nome, descricao, preco, imagem];
+  if (isNaN(quantidade_estoque) || quantidade_estoque < 0) {
+    return res.status(400).json({ error: "O estoque deve ser um número inteiro válido e positivo." });
+  }
+
+  const q = "INSERT INTO cookie(`nome`, `descricao`, `preco`, `quantidade_estoque`, `imagem`) VALUES(?)";
+  const values = [nome, descricao, preco, quantidade_estoque, imagem];
   
   db.query(q, [values], (err) => {
     if (err) return res.status(500).json({ error: "Erro interno ao cadastrar cookie." });
@@ -40,18 +42,20 @@ export const addCookie = (req, res) => {
 };
 
 export const updateCookie = (req, res) => {
-  const { nome, descricao, preco, imagem } = req.body;
+  const { nome, descricao, preco, quantidade_estoque, imagem } = req.body;
   
-  // VALIDAÇÕES para o Update
-  if (!nome || !descricao || preco === undefined || !imagem) {
+  if (!nome || !descricao || preco === undefined || quantidade_estoque === undefined || !imagem) {
     return res.status(400).json({ error: "Todos os campos são obrigatórios." });
   }
   if (isNaN(preco) || preco < 0) {
     return res.status(400).json({ error: "O preço deve ser um valor numérico válido." });
   }
+  if (isNaN(quantidade_estoque) || quantidade_estoque < 0) {
+    return res.status(400).json({ error: "O estoque deve ser um número inteiro válido." });
+  }
 
-  const q = "UPDATE cookie SET `nome` = ?, `descricao` = ?, `preco` = ?, `imagem` = ? WHERE `id` = ?";
-  const values = [nome, descricao, preco, imagem];
+  const q = "UPDATE cookie SET `nome` = ?, `descricao` = ?, `preco` = ?, `quantidade_estoque` = ?, `imagem` = ? WHERE `id` = ?";
+  const values = [nome, descricao, preco, quantidade_estoque, imagem];
   
   db.query(q, [...values, req.params.id], (err) => {
     if (err) return res.status(500).json({ error: "Erro interno ao atualizar cookie." });

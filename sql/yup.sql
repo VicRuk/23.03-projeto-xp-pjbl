@@ -21,7 +21,7 @@ SET @@SESSION.SQL_LOG_BIN= 0;
 -- GTID state at the beginning of the backup 
 --
 
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '40f0b39c-2719-11f1-8813-9223f8745b6c:1-11';
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '40f0b39c-2719-11f1-8813-9223f8745b6c:1-16';
 
 --
 -- Table structure for table `cookie`
@@ -35,9 +35,10 @@ CREATE TABLE `cookie` (
   `nome` varchar(50) DEFAULT '0',
   `descricao` varchar(1000) DEFAULT '0',
   `preco` float DEFAULT '0',
+  `quantidade_estoque` int DEFAULT '0',
   `imagem` varchar(50) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +47,7 @@ CREATE TABLE `cookie` (
 
 LOCK TABLES `cookie` WRITE;
 /*!40000 ALTER TABLE `cookie` DISABLE KEYS */;
-INSERT INTO `cookie` VALUES (1,'Tradicional','Gotas de Chocolate',500,'cookieT'),(2,'Red Velvet','Gotas de Chocolate Brancos',500,'cookieRV'),(3,'Chocolate Amargo','Chocolate Amargo com Gotas de Chocolate Branco',500,'cookieCB');
+INSERT INTO `cookie` VALUES (1,'Tradicional','Gotas de Chocolate',500,10,'cookieT'),(2,'Red Velvet','Gotas de Chocolate Brancos',500,20,'cookieRV'),(3,'Chocolate Amargo','Chocolate Amargo com Gotas de Chocolate Branco',500,30,'cookieCB');
 /*!40000 ALTER TABLE `cookie` ENABLE KEYS */;
 UNLOCK TABLES;
 SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
@@ -60,4 +61,4 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-25  0:20:24
+-- Dump completed on 2026-03-25  1:20:04

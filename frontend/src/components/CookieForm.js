@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams, Link } from "react-router-dom";
 
 const CookieForm = () => {
-  const [cookie, setCookie] = useState({ nome: "", descricao: "", preco: "", imagem: "cookieT" });
+  const [cookie, setCookie] = useState({ nome: "", descricao: "", preco: "", quantidade_estoque: "", imagem: "cookieT" });
   const [erro, setErro] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
@@ -31,7 +31,7 @@ const CookieForm = () => {
     e.preventDefault();
     setErro("");
     try {
-      const cookieData = { ...cookie, preco: parseFloat(cookie.preco) };
+      const cookieData = { ...cookie, preco: parseFloat(cookie.preco), quantidade_estoque: parseInt(cookie.quantidade_estoque, 10) };
       
       if (id) {
         await axios.put(`http://localhost:8800/${id}`, cookieData);
@@ -100,6 +100,20 @@ const CookieForm = () => {
                     placeholder="Preço (ex: 5.00)"
                     onChange={handleChange}
                     value={cookie.preco}
+                />
+              </div>
+
+              <div className="input-group mb-3 shadow-sm">
+                <span className="input-group-text bg-white">Estoque</span>
+                <input
+                    className="form-control"
+                    type="number"
+                    step="1"
+                    name="quantidade_estoque"
+                    required
+                    placeholder="Quantidade em estoque (ex: 20)"
+                    onChange={handleChange}
+                    value={cookie.quantidade_estoque}
                 />
               </div>
 
