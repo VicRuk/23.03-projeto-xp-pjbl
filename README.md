@@ -52,7 +52,7 @@ O projeto possui uma arquitetura de pastas clara e modularizada:
 ### 4.1. Configurando o Banco de Dados (MySQL)
 1. Abra o gestor MySQL (ex: MySQL Workbench).
 2. Crie um banco de dados (schema) chamado `yup`.
-3. Importe o ficheiro `sql/yup.sql` para dentro deste banco. Ele criará a tabela `cookie` com os campos necessários (`id`, `nome`, `descricao`, `preco`, `imagem`) e inserirá os dados iniciais.
+3. Importe o ficheiro `sql/yup.sql` para dentro deste banco. Ele criará a tabela `cookie` com os campos necessários (`id`, `nome`, `descricao`, `preco`, `quantidade_estoque`, `imagem`) e inserirá os dados iniciais.
 4. Se necessário, abra o ficheiro `backend/db.js` e ajuste a senha de acordo com a sua máquina local.
 
 ### 4.2. Executando o Backend (API)
