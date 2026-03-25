@@ -4,6 +4,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 
 const CookieForm = () => {
   const [cookie, setCookie] = useState({ nome: "", descricao: "", preco: "", imagem: "cookieT" });
+  const [erro, setErro] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -12,9 +13,9 @@ const CookieForm = () => {
       const fetchCookie = async () => {
         try {
           const res = await axios.get(`http://localhost:8800/${id}`);
-          // Converte o preço para string
           setCookie({...res.data, preco: res.data.preco.toFixed(2)});
         } catch (err) {
+          setErro("Falha ao carregar os dados deste cookie.");
           console.log(err);
         }
       };
@@ -23,18 +24,13 @@ const CookieForm = () => {
   }, [id]);
 
   const handleChange = (e) => {
-    // Tratamento para o preço salvar como numérico
-    if(e.target.name === 'preco'){
-        setCookie((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    } else {
-        setCookie((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    setCookie((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErro("");
     try {
-      // Converte o preço de string para número float antes de enviar para a API
       const cookieData = { ...cookie, preco: parseFloat(cookie.preco) };
       
       if (id) {
@@ -44,6 +40,12 @@ const CookieForm = () => {
       }
       navigate("/");
     } catch (err) {
+      // Captura o erro
+      if (err.response && err.response.data && err.response.data.error) {
+          setErro(err.response.data.error);
+      } else {
+          setErro("Ocorreu um erro inesperado ao guardar o cookie.");
+      }
       console.log(err);
     }
   };
@@ -55,7 +57,10 @@ const CookieForm = () => {
           <i className="bi bi-x-circle-fill"></i>
         </Link>
         
-        <h1 className="mb-5 h2 text-center"><b>{id ? "Editar Produto" : "Adicionar Produto"}</b></h1>
+        <h1 className="mb-4 h2 text-center"><b>{id ? "Editar Produto" : "Adicionar Produto"}</b></h1>
+        
+        {/* Exibe o erro na interface se houver */}
+        {erro && <div className="alert alert-danger shadow-sm">{erro}</div>}
         
         <div className="row align-items-center forms">
           <div className="col-12 col-md-5 d-flex justify-content-center mb-4 mb-md-0 px-md-3">

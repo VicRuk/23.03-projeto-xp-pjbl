@@ -4,21 +4,42 @@ import { useParams, Link } from "react-router-dom";
 
 const CookieDetail = () => {
   const [cookie, setCookie] = useState(null);
+  const [erro, setErro] = useState("");
   const { id } = useParams();
 
   useEffect(() => {
     const fetchCookie = async () => {
       try {
+        setErro("");
         const res = await axios.get(`http://localhost:8800/${id}`);
         setCookie(res.data);
       } catch (err) {
+        if (err.response && err.response.status === 404) {
+            setErro("Ops! Este cookie não foi encontrado.");
+        } else {
+            setErro("Erro ao tentar carregar os detalhes do cookie. Verifique a conexão.");
+        }
         console.log(err);
       }
     };
     fetchCookie();
   }, [id]);
 
-  if (!cookie) return <div className="text-center mt-5">Carregando...</div>;
+  // Se houver um erro, exibe a mensagem de erro e o botão de voltar, e para a execução aqui
+  if (erro) {
+      return (
+          <div className="text-center mt-5">
+              <div className="alert alert-danger d-inline-block shadow-sm">
+                  {erro}
+              </div>
+              <div className="mt-3">
+                  <Link to="/" className="btn btn-outline-dark">Voltar para a página inicial</Link>
+              </div>
+          </div>
+      );
+  }
+
+  if (!cookie) return <div className="text-center mt-5 fw-bold">Carregando os detalhes...</div>;
 
   return (
     <div className="row justify-content-center px-3 pt-2">
