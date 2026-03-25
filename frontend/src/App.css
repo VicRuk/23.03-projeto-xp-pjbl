@@ -1,0 +1,83 @@
+body {
+    background-color: #F5F5F5;
+    color: #333;
+}
+
+h1 {
+    font-weight: 800;
+    color: #000;
+}
+
+h2 {
+    font-weight: 700;
+}
+
+p {
+    font-size: 0.9rem;
+}
+
+.input-box input {
+    height: 50px;
+    border-radius: 20px;
+    padding-left: 70px;
+}
+
+.input-box i {
+    position: absolute;
+    left: 20px;
+    top: 13px;
+    font-size: 20px;
+    color: #000;
+}
+
+
+.cookie-card {
+    background: white;
+    border-radius: 40px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+.cookie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.card-image img {
+    max-height: 120px;
+    object-fit: contain;
+}
+
+.large-cookie-image {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+}
+
+#footer {
+    background-color: #EFEFEF;
+    padding: 15px 0;
+    width: 100%;
+    margin-top: auto;
+}
+
+#copyright {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    color: #888;
+}
+
+.forms input, .forms textarea, .forms select {
+    border-radius: 10px;
+}
+
+.forms input, .forms select {
+    height: 55px;
+}
+
+@media (min-width: 768px) {
+    .large-cookie-image {
+        max-height: 400px;
+    }
+}
