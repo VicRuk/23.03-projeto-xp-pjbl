@@ -1,7 +1,7 @@
 # Yup - Sistema de Gestão de Cookies
 
 ## Informações Institucionais
-- **Disciplina:** Projeto XP / PJBL (Trabalho 5)
+- **Disciplina:** Projeto Experiência Criativa: Inovando Colaborativamente
 - **Autor:** Victor Ryuki Tamezava
 - **Usuário GitHub:** `@VicRuk`
 
