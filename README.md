@@ -60,7 +60,7 @@ Abra um terminal, navega até a pasta `backend` e execute:
 ```bash
 cd backend
 npm install
-node index.js
+npm start
 ```
 O servidor funcionará em `http://localhost:8800`.
 
